@@ -2,7 +2,7 @@
 import turtle
 
 wind=turtle.Screen()  #intialize the screen
-wind.title("Ping pong") #make title for this screen
+wind.title("Tennis Match") #make title for this screen
 wind.bgcolor("black")    # make background color
 wind.setup(width=800,height=600)  #set width and height
 wind.tracer(0)   #windows doesnt update itself
@@ -25,12 +25,28 @@ rack2.color("red")
 rack2.shapesize(stretch_len=1,stretch_wid=5)
 rack2.penup()
 rack2.goto(350,0)
-
-
+ 
 #ball
+
+ball= turtle.Turtle() 
+ball.speed(0)
+ball.shape("circle")
+ball.color("white")
+ball.onclick(1)
+ball.penup()
+ball.goto(0,0)
+
+
+#Keyboard controller
+
+
+
+
+
 #Game loop
 while True:
     wind.update()  #update the windows everytime the loop run
 
-else:
-    exit()
+
+
+ 
