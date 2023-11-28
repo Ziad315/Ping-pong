@@ -36,6 +36,18 @@ ball.dx= 0.25         #rate of change in ball direction of x
 ball.dy= 0.25         #Rate of change in ball direction of y
 
 
+#Score
+score1=0
+score2=0
+score=turtle.Turtle()
+score.speed(0)
+score.color("White")
+score.penup()
+score.hideturtle()
+score.goto(0,260)
+score.write("player 1 : 0   player 2 : 0 ", align="center", font=("Time new roman",16,"normal"))
+
+
 #Move function
 
 def rack1_moveup():    
@@ -55,6 +67,7 @@ def rack2_moveup():
     y+=20
     rack2.sety(y)     #set the new position of racket two
 
+
 def rack2_movedown():
     y=rack2.ycor()
     y-=20
@@ -70,9 +83,50 @@ wind.onkeypress(rack2_movedown,"Down")  #When we press DOWN in the keyboard it g
 
 #Game loop
 while True:
+  
     wind.update()  #update the windows everytime the loop run
 
     ball.setx(ball.xcor()+ball.dx)  #get the x of the ball and add change in x
     ball.sety(ball.ycor()+ball.dy) #get the y of the ball and add change in y
 
+    #Check ball in board 
+    if ball.ycor() > 290:      #When the ball it the wall up it reflect
+        ball.sety(290)
+        ball.dy *=-1
+
+
+
+    if ball.ycor() < -290:      #When the ball it the wall it reflect
+      ball.sety(-290)
+      ball.dy *=-1    
+
+
+    if ball.xcor() >390:    #When the ball hit right it return to the center
+        ball.goto(0,0)  
+        ball.dx *=-1
+        score1+=1
+        score.clear()
+        score.write("player 1 : {}  player 2 : {} ".format(score1,score2), align="center", font=("Time new roman",16,"normal"))
+
+
+    if ball.xcor() <-390:     #When the ball hit left it return to the center
+        ball.goto(0,0)  
+        ball.dx *=-1
+        score2+=1
+        score.clear()
+        score.write("player 1 : {}  player 2 : {} ".format(score1,score2), align="center", font=("Time new roman",16,"normal"))
+
+
+    if (ball.xcor() > 340 and ball.xcor() <350) and (ball.ycor() < rack2.ycor() +50 and ball.ycor() > rack2.ycor()-50):
+        ball.setx(340)
+        ball.dx*=-1
+
+
+    if (ball.xcor() < -340 and ball.xcor() >-350) and (ball.ycor() < rack1.ycor() +50 and ball.ycor() > rack1.ycor()-50):
+        ball.setx(-340)
+        ball.dx*=-1
+        
+
+
+  
  
