@@ -1,11 +1,15 @@
 #import libraries
 import turtle
+import tkinter as tk
+from pygame import mixer
+
 
 wind=turtle.Screen()  #intialize the screen
 wind.title("Ping Pong") #make title for this screen
 wind.bgcolor("black")    # make background color
 wind.setup(width=800,height=600)  #set width and height
 wind.tracer(0)   #windows doesnt update itself
+
 
 #racket one
 rack1= turtle.Turtle()  # Make object turtle 
@@ -34,6 +38,12 @@ ball.penup()
 ball.goto(0,0)       #Make the ball in the center ot the screen
 ball.dx= 0.25         #rate of change in ball direction of x
 ball.dy= 0.25         #Rate of change in ball direction of y
+
+#Background music
+def play_music():
+    mixer.init()
+    mixer.music.load('song.mp3') # replace 'your_music_file.mp3' with your music file
+    mixer.music.play()
 
 
 #Score
@@ -75,6 +85,7 @@ def rack2_movedown():
 
 #keyboard
 wind.listen()
+play_music()
 wind.onkeypress(rack1_moveup,"w")    #When we press w in the keyboard it goes up
 wind.onkeypress(rack1_movedown,"s")  #When we press s in the keyboard it goes down
 wind.onkeypress(rack2_moveup,"Up")    #When we press UP in the keyboard it goes up
@@ -83,8 +94,8 @@ wind.onkeypress(rack2_movedown,"Down")  #When we press DOWN in the keyboard it g
 
 #Game loop
 while True:
-  
     wind.update()  #update the windows everytime the loop run
+    
 
     ball.setx(ball.xcor()+ball.dx)  #get the x of the ball and add change in x
     ball.sety(ball.ycor()+ball.dy) #get the y of the ball and add change in y
@@ -127,6 +138,6 @@ while True:
         ball.dx*=-1
         
 
-
+ 
   
  
